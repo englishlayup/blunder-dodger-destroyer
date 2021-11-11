@@ -1,9 +1,10 @@
 import gym
+import gym_chess
 import random
 
 env = gym.make('Chess-v0')
 print(env.render())
-
+gym_chess.Chess
 env.reset()
 done = False
 
