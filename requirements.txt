@@ -1,5 +1,4 @@
 gym~=0.17.3
 ipython~=7.28.0
-gym-chess~=0.1.1
 jupyterlab~=3.2.3
 chess~=1.7.0
