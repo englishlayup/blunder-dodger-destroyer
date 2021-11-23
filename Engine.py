@@ -1,5 +1,3 @@
-import gym
-import gym_chess
 import chess
 import random
 
