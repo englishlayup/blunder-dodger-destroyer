@@ -6,14 +6,6 @@ import chess
 import numpy as np
 import itertools
 
-#Defining the Node
-class Node:
-    def __init__(self, move, value, parent=None):
-        self.move = move
-        self.value = value
-        self.parent = parent
-        self.children = list()
-
 piece_value_map = {
     chess.PAWN: 100,
     chess.KNIGHT: 300,
