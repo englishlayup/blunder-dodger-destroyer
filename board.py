@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 import os
 import chess
 import ab
+import sys
 
 # piece imgs stored in pieces folder
 PATH = 'pieces/'
@@ -73,7 +74,7 @@ def redraw(win, visual_board):
 
             piece_img = imgs[visual_board[rank][file]]
 
-            element = win.FindElement(key=(rank, file))
+            element = win.find_element(key=(rank, file))
             element.Update(button_color=('white', color), image_filename=piece_img)
 
 
@@ -133,6 +134,9 @@ def play():
 
             while True:
                 event, value = win.Read()
+                
+                # window was prematurely exited
+                if event == sg.WIN_CLOSED or event == 'Bye!': sys.exit()
 
                 if isinstance(event, tuple):
                     if moving == False:
@@ -145,7 +149,7 @@ def play():
                         piece = visual_board[rank][file]
 
                         # red visual cue
-                        button_square = win.FindElement(key=(rank, file))
+                        button_square = win.find_element(key=(rank, file))
                         button_square.Update(button_color=('white', 'red'))
 
                         # piece can now move
@@ -196,6 +200,7 @@ def play():
                         visual_board[move_from[0]][move_from[1]] = BLANK
                         visual_board[rank][file] = piece
                         redraw(win, visual_board)
+                        
                         break
 
         # engine's turn
