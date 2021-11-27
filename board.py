@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 import os
 import chess
-
+import ab
 
 # piece imgs stored in pieces folder
 PATH = 'pieces/'
@@ -120,6 +120,8 @@ def play():
     # actual chess board represented by chess's board class
     board = chess.Board()
 
+    agent = ab.AlphaBetaAgent()
+
     # initialize game variables
     moving = False
     move_from = move_to = 0
@@ -194,14 +196,30 @@ def play():
                         visual_board[move_from[0]][move_from[1]] = BLANK
                         visual_board[rank][file] = piece
                         redraw(win, visual_board)
-
                         break
 
         # engine's turn
         else:
-            # IMPLEMENT ENGINE GAMEPLAY HERE
-            board.turn = chess.WHITE
+            # get move from alpha-beta agent
+            move = agent.alpha_beta_search(board, 2)
 
+            board.push(move)
+
+            move_from = str(move)[0:2]
+            move_to = str(move)[2:]
+
+            # convert chess coordinates to 2d array coordinates
+            # ord(char) - 97 will convert letter to number
+            move_from = '{}{}'.format(str(ord(move_from[0]) - 97), str(8 - int(move_from[1])))
+            move_to = '{}{}'.format(str(ord(move_to[0]) - 97), str(8 - int(move_to[1])))
+
+            # piece is the one currently at move_from
+            piece = visual_board[int(move_from[1])][int(move_from[0])]
+
+            # move black piece
+            visual_board[int(move_from[1])][int(move_from[0])] = BLANK
+            visual_board[int(move_to[1])][int(move_to[0])] = piece
+            redraw(win, visual_board)
 
 if __name__ == '__main__':
     play()
