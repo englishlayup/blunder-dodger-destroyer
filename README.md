@@ -1,5 +1,5 @@
 # blunder-dodger-destroyer
-chess engine to destroy blunder-dodger
+chess engine to destroy [blunder-dodger](https://github.com/AlasdairBennett/blunder-dodger) <br>
 
 # Installing the require packages
 ### `pip install requirement.txt`
